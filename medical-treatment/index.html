@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<base href="../">
+<title>Medical Treatment | D-FREE Foundation</title>
+<meta name="description" content="D-FREE medication recommendations for diarrheal disease in Rwanda and the analysis of our practitioner survey on recommended medications.">
+<link rel="canonical" href="https://dfreengo.org/medical-treatment/">
+<meta name="theme-color" content="#0b4aa8">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="D-FREE Foundation">
+<meta property="og:title" content="Medical Treatment | D-FREE Foundation">
+<meta property="og:description" content="D-FREE medication recommendations for diarrheal disease in Rwanda and the analysis of our practitioner survey on recommended medications.">
+<meta property="og:url" content="https://dfreengo.org/medical-treatment/">
+<meta property="og:image" content="https://dfreengo.org/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="D-FREE Foundation homepage: the D-FREE Project team with MEDSAR Rwanda volunteers">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Medical Treatment | D-FREE Foundation">
+<meta name="twitter:description" content="D-FREE medication recommendations for diarrheal disease in Rwanda and the analysis of our practitioner survey on recommended medications.">
+<meta name="twitter:image" content="https://dfreengo.org/images/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Source+Serif+4:wght@700&display=swap" rel="stylesheet">
+<style>
+  /* Layout: white header + centered nav, soft blue page, white rounded content cards (matches the original Bubble site) */
+  :root{
+    --blue:#0b4aa8;
+    --blue-soft:#eaf3fd;
+    --bg:#e6edf7;
+    --card:#ffffff;
+    --ink:#1b1d22;
+    --ink-2:#3b3f47;
+    --muted:#6b7280;
+    --line:#e8ebf0;
+    --red:#c0161d;
+    --doc-dark:#2a2a2a;
+    --radius:20px;
+    --shadow:0 1px 2px rgba(16,40,90,.04), 0 8px 24px rgba(16,40,90,.06);
+    --font:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+    --font-logo:'Source Serif 4',Georgia,'Times New Roman',serif;
+    color-scheme:light;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font);color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  :focus-visible{outline:3px solid rgba(11,74,168,.45);outline-offset:3px;border-radius:6px}
+  .gutter{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+  /* ---------- Header ---------- */
+  body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:#fff}
+  header{background:#fff;position:sticky;top:env(safe-area-inset-top,0px);z-index:50;box-shadow:0 1px 0 var(--line)}
+  .brand-row{display:flex;justify-content:center;align-items:center;padding-block:14px;border-bottom:1px solid var(--line);position:relative}
+  .brand{display:flex;align-items:center;gap:8px}
+  .brand img{height:70px;width:auto}
+  .menu-btn{display:none;position:absolute;right:max(10px,env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:10px}
+  .menu-btn span{display:block;width:22px;height:2px;background:var(--ink);margin:5px auto;transition:.25s}
+  .menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
+  .menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  nav ul{list-style:none;display:flex;justify-content:center;gap:clamp(16px,3.6vw,70px)}
+  nav a{display:block;padding:15px 2px;font-size:15px;letter-spacing:.2px;position:relative;transition:color .2s;white-space:nowrap}
+  nav a::after{content:'';position:absolute;left:0;right:0;bottom:8px;height:2px;background:var(--blue);transform:scaleX(0);transition:transform .25s}
+  nav a:hover,nav a.active{color:var(--blue)}
+  nav a.active::after,nav a:hover::after{transform:scaleX(1)}
+
+  /* ---------- Pages ---------- */
+  .page{display:none}
+  .page.active{display:block;animation:fade .4s ease}
+  @keyframes fade{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .wrap{max-width:1160px;margin:0 auto}
+  .page-title{font-size:clamp(34px,5vw,56px);font-weight:700;color:var(--blue);text-align:center;letter-spacing:-.5px;padding-block:clamp(40px,7vw,90px) clamp(24px,3.5vw,44px);line-height:1.1;text-wrap:balance}
+  .stack{display:flex;flex-direction:column;gap:20px;padding-bottom:80px}
+  .card{background:var(--card);border-radius:var(--radius);padding:clamp(22px,3.4vw,40px);box-shadow:var(--shadow);min-width:0}
+  .card h2{font-size:clamp(24px,2.6vw,32px);font-weight:600;text-align:center;margin-bottom:20px;line-height:1.25;text-wrap:balance}
+  .card h3.sub{font-size:clamp(20px,2vw,22px);font-weight:600;text-align:center;margin-bottom:18px;text-wrap:balance}
+  .card p{color:var(--ink-2);font-size:16.5px}
+  .card p + p{margin-top:12px}
+
+  /* ---------- Home ---------- */
+  .hero{position:relative;height:clamp(440px,51vw,1000px);overflow:hidden;background:#d8d2b8}
+  .hero > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%}
+  .hero-box{position:absolute;left:max(clamp(16px,1.6vw,32px),env(safe-area-inset-left,0px));bottom:clamp(16px,1.6vw,32px);max-width:780px;margin-right:16px;background:rgba(40,40,40,.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#fff;padding:clamp(22px,2.6vw,34px) clamp(22px,2.8vw,32px);border-radius:6px}
+  .hero-box h1{font-size:clamp(22px,2.4vw,32px);font-weight:600;line-height:1.35;margin-bottom:14px;text-wrap:balance}
+  .hero-box p{font-size:clamp(14.5px,1.1vw,16px);color:#e9e9e9;line-height:1.6}
+  .stats{background:var(--blue-soft);padding-block:clamp(32px,4vw,44px)}
+  .stats .row{display:flex;justify-content:center;gap:clamp(28px,8vw,90px);flex-wrap:wrap;text-align:center}
+  .stat b{display:block;font-size:clamp(34px,3.6vw,42px);font-weight:600;line-height:1.1;margin-bottom:8px;font-variant-numeric:tabular-nums}
+  .stat span{font-size:15.5px;color:var(--ink-2);line-height:1.45}
+  .partners{background:#fff;padding-block:clamp(32px,4vw,40px) 56px}
+  .partners .row{display:flex;justify-content:center;gap:clamp(28px,8vw,110px);flex-wrap:wrap}
+  .partner{text-align:center;font-size:15.5px;color:var(--ink-2)}
+  .partner .mark{width:96px;height:96px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;transition:transform .25s}
+  .partner img{object-fit:contain}
+  /* sized by eye: the solid orange disc reads heavier, the MEDSAR crest lighter */
+  .p-dfree{width:88px;height:88px}
+  .p-youth{width:80px;height:80px;border-radius:50%;object-fit:cover!important}
+  .p-medsar{width:80px;height:80px}
+  .partner:hover .mark{transform:translateY(-3px)}
+
+  /* ---------- About ---------- */
+  .checks{list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:14px}
+  .checks li{display:flex;align-items:flex-start;gap:12px;font-size:16.5px;color:var(--ink-2)}
+  .checks li::before{content:'';flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--blue) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/15px no-repeat;margin-top:-1px}
+  .checks.loose{gap:22px}
+
+  /* ---------- News ---------- */
+  .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .nl-thumb{position:relative;display:block;border-radius:10px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.08);transition:transform .25s,box-shadow .25s}
+  .nl-thumb img{width:100%;aspect-ratio:1/1.414;object-fit:cover;object-position:top;background:#eef2f7}
+  .nl-thumb span{position:absolute;left:10px;bottom:10px;background:rgba(20,20,20,.75);color:#fff;font-size:12.5px;font-weight:500;padding:4px 10px;border-radius:999px;opacity:0;transition:opacity .2s}
+  .nl-thumb:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(0,0,0,.14)}
+  .nl-thumb:hover span,.nl-thumb:focus-visible span{opacity:1}
+  .photo{border-radius:12px;overflow:hidden;background:#e9eef5}
+  .photo img{width:100%;aspect-ratio:16/9;object-fit:cover;transition:transform .6s ease}
+  .photo:hover img{transform:scale(1.02)}
+  .caption{margin-top:12px;font-size:15px!important}
+  .caption + .photo{margin-top:20px}
+  .voices{display:flex;flex-direction:column;gap:14px}
+  .voice{display:flex;align-items:center;gap:clamp(14px,2vw,20px);border:1px solid var(--line);border-radius:14px;padding:clamp(14px,1.6vw,18px);transition:border-color .2s,box-shadow .2s}
+  .voice:hover{border-color:#d3dff0;box-shadow:0 4px 16px rgba(16,40,90,.06)}
+  .voice img{width:70px;height:70px;border-radius:50%;object-fit:cover;flex-shrink:0}
+  .voice figcaption{min-width:0}
+  .voice strong{display:block;font-size:16px;font-weight:600;margin-bottom:4px}
+  .voice blockquote{font-size:15px;color:var(--ink-2);line-height:1.55}
+  .ask{text-align:center;padding-top:16px;display:flex;flex-direction:column;align-items:center;gap:20px}
+  .ask p{font-size:16px;color:var(--ink-2)}
+  .btn-faq{padding:10px 22px;border:1.5px solid var(--ink);border-radius:999px;font-size:clamp(17px,1.6vw,19px);font-weight:600;transition:background .2s,color .2s,border-color .2s}
+  .btn-faq:hover{background:var(--blue);border-color:var(--blue);color:#fff}
+
+  /* ---------- Members ---------- */
+  .member{display:flex;gap:clamp(20px,3vw,36px);align-items:center;background:linear-gradient(180deg,#d3dff0 0%,#eef2f8 55%,#f8f9fb 100%);border-radius:var(--radius);padding:clamp(22px,2.6vw,30px) clamp(22px,2.6vw,32px);box-shadow:var(--shadow)}
+  .member > div{min-width:0}
+  .avatar{width:112px;height:112px;border-radius:50%;object-fit:cover;object-position:center 25%;flex-shrink:0;box-shadow:0 4px 14px rgba(20,40,80,.15);border:3px solid #fff;background:#fff}
+  .member h3{font-size:clamp(21px,2vw,25px);font-weight:500;color:#2d3b36;line-height:1.3}
+  .member .role{font-size:14.5px;color:var(--ink-2);margin:6px 0 10px}
+  .member p{font-size:15.5px;color:var(--ink-2);line-height:1.6;max-width:80ch}
+
+  /* ---------- Campaign ---------- */
+  .campaign .card h2.blue{color:var(--blue);font-size:clamp(23px,2.4vw,28px);margin-bottom:14px}
+  .alert{display:flex;gap:10px;align-items:flex-start;font-size:15px!important}
+  .alert svg{flex-shrink:0;margin-top:4px}
+  .c-section{margin-top:44px}
+  .c-section h3{font-size:clamp(22px,2.3vw,28px);font-weight:600;text-align:center;margin-bottom:14px}
+  .c-icon{width:76px;height:76px;object-fit:contain;margin:0 auto 18px}
+  .campaign p,.campaign li{font-size:15.5px;color:var(--ink-2)}
+  .campaign ol{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .habit{margin-top:40px}
+  .habit:first-of-type{margin-top:8px}
+  .habit-head{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+  .habit-head .c-icon{margin:0;width:68px;height:68px;flex-shrink:0}
+  .habit-head h3{font-size:clamp(21px,2.2vw,27px);font-weight:600;line-height:1.25}
+  .dyk{list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:8px}
+  .dyk li{display:flex;gap:12px;align-items:flex-start}
+  .num{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px}
+  .num.star{background:none}
+  .hl-b{color:var(--blue);font-weight:600}
+  .hl-r{color:var(--red);font-weight:600}
+  .tagline{text-align:center;color:var(--blue)!important;font-weight:600;font-size:19px!important;margin-top:22px}
+
+  /* ---------- Documents ---------- */
+  .doc-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding-bottom:80px}
+  .doc-card{display:flex;flex-direction:column;align-items:center}
+  .doc-card h2{font-size:clamp(20px,1.9vw,23px);margin-bottom:20px}
+  .cover{position:relative;display:block;width:100%;border-radius:8px;overflow:hidden;box-shadow:0 10px 30px rgba(40,25,25,.18);transition:transform .3s,box-shadow .3s}
+  .cover img{width:100%;aspect-ratio:1/1.414;object-fit:cover;object-position:top;background:#463736}
+  .cover::after{content:'Open document';position:absolute;left:50%;bottom:18px;transform:translate(-50%,8px);background:rgba(20,20,20,.82);color:#fff;font-size:14px;font-weight:500;padding:8px 16px;border-radius:999px;opacity:0;transition:.25s;white-space:nowrap}
+  .cover:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(40,25,25,.26)}
+  .cover:hover::after,.cover:focus-visible::after{opacity:1;transform:translate(-50%,0)}
+  .btn-view{margin-top:20px;display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border:1.5px solid var(--ink);border-radius:999px;font-size:15px;transition:background .2s,color .2s,border-color .2s}
+  .btn-view:hover{background:var(--blue);border-color:var(--blue);color:#fff}
+
+
+  /* ---------- PDF viewer modal ---------- */
+  .pdf-modal{position:fixed;inset:0;z-index:200;background:rgba(12,16,26,.78);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:max(20px,env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) max(20px,env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
+  .pdf-modal[hidden]{display:none!important}
+  .pdf-box{width:min(960px,100%);height:100%;max-height:100%;background:#f1f3f6;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,.4);animation:pop .25s ease}
+  @keyframes pop{from{transform:scale(.97);opacity:.5}to{transform:none;opacity:1}}
+  .pdf-bar{display:flex;align-items:center;gap:12px;padding:12px 14px 12px 20px;background:#fff;border-bottom:1px solid var(--line)}
+  .pdf-bar h4{flex:1;min-width:0;font-size:16px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pdf-bar .count{font-size:13px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .pdf-bar a{font-size:14px;color:var(--blue);font-weight:500;white-space:nowrap;padding:6px 10px;border-radius:8px}
+  .pdf-bar a:hover{background:var(--blue-soft)}
+  .pdf-close{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .pdf-close:hover{background:#eef1f5}
+  .pdf-pages{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:20px;display:flex;flex-direction:column;align-items:center;gap:16px}
+  .pdf-page{flex-shrink:0;width:100%;max-width:860px;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.12);border-radius:4px;overflow:hidden}
+  .pdf-page{position:relative}
+  .pdf-page canvas{display:block;width:100%;height:auto}
+  .pdf-page:not(.ready)::after{content:'';position:absolute;top:50%;left:50%;width:30px;height:30px;margin:-15px 0 0 -15px;border:3px solid #d7deea;border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite}
+  .pdf-msg{margin:auto;color:var(--muted);font-size:15px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
+  .spinner{width:34px;height:34px;border:3px solid #d7deea;border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  body.locked{overflow:hidden}
+
+  /* ---------- Footer ---------- */
+  footer{background:#fff;border-top:1px solid var(--line);text-align:center;padding-block:26px;font-size:14px;color:var(--muted)}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:1060px){
+    nav ul{gap:clamp(10px,2.2vw,40px)}
+    nav a{font-size:13.5px}
+  }
+  @media (max-width:860px){
+    .menu-btn{display:block}
+    nav{max-height:0;overflow:hidden;transition:max-height .35s ease}
+    nav.open{max-height:480px}
+    nav ul{flex-direction:column;gap:0;padding-block:6px 10px}
+    nav li{border-bottom:1px solid var(--line)}
+    nav li:last-child{border-bottom:0}
+    nav a{padding:14px 8px;font-size:15px}
+    nav a::after{display:none}
+    nav a.active{background:var(--blue-soft);border-radius:8px}
+    .doc-grid{grid-template-columns:1fr;max-width:540px;margin:0 auto;width:100%}
+    .pdf-modal{padding:0}
+    .pdf-box{border-radius:0;width:100%}
+    .pdf-pages{padding:12px}
+  }
+  @media (max-width:640px){
+    .brand-row{justify-content:flex-start;padding-block:10px}
+    .brand img{height:52px}
+    .hero{height:auto;display:flex;flex-direction:column}
+    .hero > img{position:relative;height:280px}
+    .hero-box{position:relative;left:0;bottom:0;max-width:none;margin:0;border-radius:0;background:#2b2b2b}
+    .news-grid{grid-template-columns:1fr 1fr}
+    .duo{grid-template-columns:1fr}
+    .member{flex-direction:column;align-items:flex-start}
+    .avatar{width:92px;height:92px}
+    .card p,.checks li{font-size:15.5px}
+    .habit-head .c-icon{width:54px;height:54px}
+    .pdf-bar .count{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand-row gutter">
+    <a href="./" class="brand" aria-label="D-FREE Foundation home">
+      <img src="images/logo-full.webp" alt="D-FREE Foundation" width="174" height="70">
+    </a>
+    <button class="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mainnav"><span></span><span></span><span></span></button>
+  </div>
+  <nav id="mainnav" class="gutter">
+    <ul>
+      <li><a href="./" data-page="home">HOME</a></li>
+      <li><a href="about/" data-page="about">ABOUT THE PROJECT</a></li>
+      <li><a href="news/" data-page="news">NEWS</a></li>
+      <li><a href="members/" data-page="members">MEMBERS</a></li>
+      <li><a href="campaign/" data-page="campaign">CAMPAIGN</a></li>
+      <li><a href="intervention/" data-page="intervention">INTERVENTION</a></li>
+      <li><a href="medical-treatment/" data-page="medical-treatment" class="active" aria-current="page">MEDICAL TREATMENT</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+<!-- ================= MEDICAL TREATMENT ================= -->
+<section class="page active gutter" id="medical-treatment">
+  <div class="wrap">
+    <h1 class="page-title">Medical Treatment</h1>
+    <div class="doc-grid">
+      <div class="card doc-card">
+        <h2>Medication Recommendations</h2>
+        <button class="cover" data-pdf="docs/medication-recommendations.pdf" data-title="Medication Recommendations for Rwanda" aria-label="Open Medication Recommendations">
+          <img src="images/covers/medication-recommendations.webp" alt="" loading="lazy">
+        </button>
+        <button class="btn-view" data-pdf="docs/medication-recommendations.pdf" data-title="Medication Recommendations for Rwanda">Click to view</button>
+      </div>
+      <div class="card doc-card">
+        <h2>Medication Survey Analysis</h2>
+        <button class="cover" data-pdf="docs/survey-analysis.pdf" data-title="Analysis of Practitioner-Survey for Recommended Medications in Rwanda" aria-label="Open Medication Survey Analysis">
+          <img src="images/covers/survey-analysis.webp" alt="" loading="lazy">
+        </button>
+        <button class="btn-view" data-pdf="docs/survey-analysis.pdf" data-title="Analysis of Practitioner-Survey for Recommended Medications in Rwanda">Click to view</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="gutter">© <span id="yr">2025</span> D-FREE Foundation · Combating diarrheal disease in Rwanda</footer>
+
+<!-- PDF popup -->
+<div class="pdf-modal" id="pdfModal" hidden role="dialog" aria-modal="true" aria-labelledby="pdfTitle">
+  <div class="pdf-box">
+    <div class="pdf-bar">
+      <h4 id="pdfTitle">Document</h4>
+      <span class="count" id="pdfCount"></span>
+      <a id="pdfOpen" href="#" target="_blank" rel="noopener">Open in new tab</a>
+      <button class="pdf-close" id="pdfClose" aria-label="Close document">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <div class="pdf-pages" id="pdfPages"></div>
+  </div>
+</div>
+
+<script>
+  // ---------- Navigation ----------
+  var nav = document.getElementById('mainnav');
+  var menuBtn = document.querySelector('.menu-btn');
+  // Old links like /#about now redirect to /about/
+  var legacy = ['about','news','members','campaign','intervention','medical-treatment'];
+  var h = location.hash.slice(1);
+  if (legacy.indexOf(h) > -1) location.replace(document.baseURI.replace(/[#?].*$/, '').replace(/[^/]*$/, '') + h + '/');
+  menuBtn.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // ---------- PDF popup (renders every page with PDF.js, works on phones too) ----------
+  var PDFJS = new URL('js/', document.baseURI).href;
+  var modal = document.getElementById('pdfModal');
+  var pagesEl = document.getElementById('pdfPages');
+  var countEl = document.getElementById('pdfCount');
+  var lastFocus = null, loadToken = 0, libPromise = null;
+
+  function loadScript(src){
+    return new Promise(function(res, rej){
+      var s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = rej;
+      document.head.appendChild(s);
+    });
+  }
+  function loadLib(){
+    if (!libPromise){
+      // PDF.js is bundled in the js/ folder, so the viewer needs no outside service.
+      libPromise = loadScript(PDFJS + 'pdf.min.js')
+        .then(function(){ window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + 'pdf.worker.min.js'; return window.pdfjsLib; });
+      libPromise.catch(function(){ libPromise = null; });
+    }
+    return libPromise;
+  }
+
+  function message(html){ pagesEl.innerHTML = '<div class="pdf-msg">' + html + '</div>'; }
+
+  function openPdf(url, title, startPage){
+    url = new URL(url, document.baseURI).href;
+    lastFocus = document.activeElement;
+    document.getElementById('pdfTitle').textContent = title;
+    document.getElementById('pdfOpen').href = url;
+    countEl.textContent = '';
+    message('<div class="spinner"></div>Loading document…');
+    modal.hidden = false;
+    document.body.classList.add('locked');
+    document.getElementById('pdfClose').focus();
+
+    var token = ++loadToken;
+    loadLib().then(function(lib){
+      return lib.getDocument(url).promise;
+    }).then(function(pdf){
+      if (token !== loadToken) return;
+      countEl.textContent = pdf.numPages + (pdf.numPages === 1 ? ' page' : ' pages');
+      pagesEl.innerHTML = '';
+      var width = Math.min(pagesEl.clientWidth - 24, 860);
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var observer = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (!e.isIntersecting || e.target.dataset.done) return;
+          e.target.dataset.done = '1';
+          observer.unobserve(e.target);
+          pdf.getPage(+e.target.dataset.n).then(function(page){
+            if (token !== loadToken) return;
+            var vp1 = page.getViewport({scale:1});
+            var vp = page.getViewport({scale: (width / vp1.width) * dpr});
+            var c = e.target.querySelector('canvas');
+            c.width = vp.width; c.height = vp.height;
+            c.style.aspectRatio = vp.width + ' / ' + vp.height;
+            page.render({canvasContext: c.getContext('2d'), viewport: vp}).promise.then(function(){ e.target.classList.add('ready'); });
+          });
+        });
+      }, {root: pagesEl, rootMargin: '600px 0px'});
+      for (var i = 1; i <= pdf.numPages; i++){
+        var wrap = document.createElement('div');
+        wrap.className = 'pdf-page'; wrap.dataset.n = i;
+        var c = document.createElement('canvas');
+        c.setAttribute('aria-label', 'Page ' + i);
+        c.style.aspectRatio = '1 / 1.414';
+        wrap.appendChild(c);
+        pagesEl.appendChild(wrap);
+        observer.observe(wrap);
+      }
+      pagesEl.scrollTop = 0;
+      if (startPage > 1 && pagesEl.children[startPage - 1]) pagesEl.children[startPage - 1].scrollIntoView({block:'start'});
+    }).catch(function(){
+      if (token !== loadToken) return;
+      message('This document couldn’t be shown here.<br><a class="btn-view" href="' + url + '" target="_blank" rel="noopener">Open the PDF in a new tab</a>');
+    });
+  }
+
+  function closePdf(){
+    loadToken++;
+    modal.hidden = true;
+    pagesEl.innerHTML = '';
+    document.body.classList.remove('locked');
+    if (lastFocus) lastFocus.focus();
+  }
+
+  document.addEventListener('click', function(e){
+    var t = e.target.closest('[data-pdf]');
+    if (t){ e.preventDefault(); openPdf(t.dataset.pdf, t.dataset.title || 'Document', +t.dataset.page || 1); }
+  });
+  document.getElementById('pdfClose').addEventListener('click', closePdf);
+  modal.addEventListener('click', function(e){ if (e.target === modal) closePdf(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !modal.hidden) closePdf(); });
+</script>
+</body>
+</html>
